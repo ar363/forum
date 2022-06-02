@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 <template>
     <Link :href="'/'">
         <svg
-            class="w-16 h-16 text-pink-600"
+            class="w-16 h-16 text-emerald-600"
             viewBox="0 0 48 48"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

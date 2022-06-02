@@ -47,7 +47,7 @@ const logout = () => {
               <!-- Logo -->
               <div class="flex items-center shrink-0">
                 <Link :href="route('home')">
-                  <JetApplicationMark class="block w-auto h-9 text-pink-600" />
+                  <JetApplicationMark class="block w-auto h-9 text-emerald-600" />
                 </Link>
               </div>
 
@@ -92,7 +92,7 @@ const logout = () => {
                   <template #trigger>
                     <button
                       v-if="$page.props.jetstream.managesProfilePhotos"
-                      class="flex text-sm rounded-full border-2 border-transparent transition  focus:outline-none focus:border-gray-300"
+                      class="flex text-sm rounded-full border-2 border-transparent transition focus:outline-none focus:border-gray-300"
                     >
                       <img
                         class="object-cover w-8 h-8 rounded-full"
@@ -104,7 +104,7 @@ const logout = () => {
                     <span v-else class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 bg-white rounded-md border border-transparent transition  hover:text-gray-700 focus:outline-none"
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 bg-white rounded-md border border-transparent transition hover:text-gray-700 focus:outline-none"
                       >
                         {{ $page.props.user.name }}
 
@@ -155,7 +155,7 @@ const logout = () => {
             <!-- Hamburger -->
             <div class="flex items-center -mr-2 sm:hidden">
               <button
-                class="inline-flex justify-center items-center p-2 text-gray-400 rounded-md transition  hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
+                class="inline-flex justify-center items-center p-2 text-gray-400 rounded-md transition hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
                 @click="showingNavigationDropdown = !showingNavigationDropdown"
               >
                 <svg
@@ -194,13 +194,13 @@ const logout = () => {
             >
               <Link
                 :href="route('login')"
-                class="block px-4 py-3 text-base font-medium text-center text-pink-800 bg-pink-100 rounded-lg  hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-300"
+                class="block px-4 py-3 text-base font-medium text-center text-emerald-800 bg-emerald-100 rounded-lg hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-300"
               >
                 Log In
               </Link>
               <Link
                 :href="route('register')"
-                class="block px-4 py-3 text-base font-medium text-center text-white bg-pink-700 rounded-lg  hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                class="block px-4 py-3 text-base font-medium text-center text-white bg-emerald-700 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
               >
                 Join Now
               </Link>
