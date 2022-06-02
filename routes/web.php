@@ -17,7 +17,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Home');
-});
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
