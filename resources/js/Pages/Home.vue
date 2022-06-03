@@ -7,7 +7,8 @@ import AppLayout from "@/Layouts/AppLayout.vue";
   <app-layout>
     <section>
       <div
-        class="relative items-center px-5 py-8 mx-auto w-full max-w-7xl bg-gray-50 md:px-12 lg:px-16 lg:py-12"
+        class="relative items-center px-5 py-8 mx-auto w-full max-w-screen-xl bg-gray-50 md:px-12 lg:px-16 lg:py-12"
+        v-if="!$page.props.user"
       >
         <div class="flex mx-auto w-full text-left">
           <div class="inline-flex relative items-center mx-auto align-middle">
@@ -24,6 +25,18 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                 Look around, share ideas, and connect with other people!
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-gray-800 bg-white border-t border-gray-100">
+        <div class="px-5 py-8 mx-auto w-full max-w-screen-lg sm:px-8">
+          <div class="hidden grid-cols-8 gap-4 p-4 text-sm text-gray-600 border-b border-gray-200 md:grid">
+            <div class="col-span-4">Post</div>
+            <div class="col-span-1">Author</div>
+            <div class="col-span-1">Participants</div>
+            <div class="col-span-1">Comments</div>
+            <div class="col-span-1">Last Active</div>
           </div>
         </div>
       </div>
