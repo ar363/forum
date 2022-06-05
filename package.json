@@ -26,5 +26,6 @@
         "vue": "^3.2.31",
         "vue-loader": "^17.0.0",
         "webpack-node-externals": "^3.0.0"
-    }
+    },
+    "postinstall": "npm run production"
 }
