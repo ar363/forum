@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Inertia\Inertia;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -42,6 +43,9 @@ class PostController extends Controller
     {
         $validatedData = $request->validated();
 
+        $discussion = Post::create([...$validatedData, 'created_by' => Auth::user()->id]);
+
+        return redirect(route('discussion.show', ['discussion' => $discussion]));
     }
 
     /**
@@ -50,9 +54,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $discussion)
     {
-        //
+        return Inertia::render('Posts/PostShow', [
+            "post" => $discussion,
+        ]);
     }
 
     /**

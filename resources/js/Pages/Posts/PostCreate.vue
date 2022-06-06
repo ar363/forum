@@ -5,11 +5,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetButton from "@/Jetstream/Button.vue";
 
-
 const form = useForm({
   title: null,
   body: null,
-  category: null,
+  category_id: null,
   tags: "",
 });
 
@@ -19,7 +18,7 @@ const submit = () => {
       ...data,
       tags: data.tags.split(',').map(x=>x.trim()).filter(x=>x!==""),
     }))
-    .submit('post', route("post.store"));
+    .submit('post', route("discussion.store"));
 };
 
 defineProps({
@@ -31,7 +30,7 @@ defineProps({
 <template>
     <app-layout>
         <div class="p-8 mx-auto max-w-screen-sm">
-            <h1 class="text-3xl font-bold">New Post</h1>
+            <h1 class="text-3xl font-bold">Start a New Discussion</h1>
 
             <form @submit.prevent="submit">
                 <label for="title" class="block mt-6 text-gray-700">Title</label>
@@ -40,12 +39,12 @@ defineProps({
                 <label for="body" class="block mt-6 text-gray-700">Body</label>
                 <textarea v-model="form.body" id="body" class="block px-3 py-2 w-full h-48 text-gray-900 rounded-md border border-gray-300 shadow-inner focus:ring focus:outline-none focus:border-emerald-600 focus:ring-emerald-600 focus:ring-opacity-30" />
 
-                <label for="category" class="block mt-6 text-gray-700">Category</label>
-                <select class="block w-full max-w-[160px] px-3 py-2 text-gray-900 rounded-md border border-gray-300 shadow-inner focus:ring focus:outline-none focus:border-emerald-600 focus:ring-emerald-600 focus:ring-opacity-30" v-model="form.category" name="category" id="category">
+                <label for="category_id" class="block mt-6 text-gray-700">Category</label>
+                <select class="block w-full max-w-[160px] px-3 py-2 text-gray-900 rounded-md border border-gray-300 shadow-inner focus:ring focus:outline-none focus:border-emerald-600 focus:ring-emerald-600 focus:ring-opacity-30" v-model="form.category_id" name="category_id" id="category_id">
                     <option v-for="category in categories" v-bind:key="category.id" :value="category.id">{{ category.name }}</option>
                 </select>
 
-                <label for="tags" class="block mt-6 text-gray-700">Tags (Separated by commas)</label>
+                <label for="tags" class="block mt-6 text-gray-700">Tags (Separated by commas, Min 1, Max 6)</label>
                 <JetInput v-model="form.tags" id="tags" class="block px-3 py-2 w-full border border-gray-300 shadow-inner focus:outline-none focus:border-emerald-600 focus:ring-emerald-600 focus:ring-opacity-30" />
 
                 <div class="flex justify-end mt-4">

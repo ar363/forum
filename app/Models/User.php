@@ -39,6 +39,11 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'email',
+        'email_verified_at',
+        'two_factor_confirmed_at',
+        'current_team_id',
+        'updated_at',
     ];
 
     /**
@@ -58,4 +63,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        // consider hosting your own instance: https://github.com/ar363/pfpgen
+        return 'https://pfpgen.deta.dev/?username='.urlencode($this->name).'&name='.urlencode($this->name);
+    }
 }

@@ -18,11 +18,13 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
+    $latestPosts = Post::with('author')
+    ->latest()
+    ->limit(15)
+    ->get();
+
     return Inertia::render('Home', [
-        'posts' => Post::withCount('comments')
-            ->with('latestCommentAt')
-            ->orderBy('created_at')
-            ->paginate(15),
+        'latestPosts' => $latestPosts,
     ]);
 })->name('home');
 
@@ -31,5 +33,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::resource('post', PostController::class, ['except' => ['index', 'show']]);
+    Route::resource('discussion', PostController::class, ['except' => ['index', 'show']]);
 });
+
+
+Route::resource('discussion', PostController::class, ['only' => ['show']]);

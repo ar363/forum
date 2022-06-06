@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
-            'category' => ['required', 'exists:categories,id'],
+            'category_id' => ['required', 'exists:categories,id'],
             'tags' => ['required', 'array', 'min:1', 'max:6'],
             'tags.*' => ['required', 'string', 'distinct'],
         ];
