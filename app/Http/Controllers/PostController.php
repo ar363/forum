@@ -56,8 +56,11 @@ class PostController extends Controller
      */
     public function show(Post $discussion)
     {
+        $comments = $discussion->comments()->paginate(15);
+
         return Inertia::render('Posts/PostShow', [
             "post" => $discussion,
+            "comments" => $comments,
         ]);
     }
 
