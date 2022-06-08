@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
 use Inertia\Inertia;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PostController;
@@ -27,6 +29,22 @@ Route::get('/', function () {
         'latestPosts' => $latestPosts,
     ]);
 })->name('home');
+
+
+Route::get('/profile/{user}', function (User $user) {
+
+    $commentCount = Comment::where(['created_by' => $user->id])->count();
+    $postCount = Post::where(['created_by' => $user->id])->count();
+
+    return Inertia::render('UserProfile', [
+        'profile' => $user,
+        'stats' => [
+            'comments' => $commentCount,
+            'posts' => $postCount,
+        ]
+    ]);
+})->whereNumber('id')->name('profile');
+
 
 Route::middleware([
     'auth:sanctum',

@@ -11,7 +11,7 @@ defineProps({
 <template>
   <div class="flex -space-x-4">
     <Avatar :user="user" v-for="user in displayUsers" v-bind:key="user.id" />
-    <a
+    <div
       v-if="displayUsers.length < totalUserCount"
       class="
         flex
@@ -25,11 +25,10 @@ defineProps({
         bg-gray-700
         border-2 border-white
         rounded-full
-        hover:bg-gray-600
       "
-      href="#"
-      >+{{ totalUserCount - displayUsers.length }}</a
     >
+      +{{ totalUserCount - displayUsers.length }}
+    </div>
 
     <div class="" v-if="totalUserCount - displayUsers.length === 0">-</div>
   </div>

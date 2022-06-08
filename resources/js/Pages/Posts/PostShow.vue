@@ -40,6 +40,12 @@ onMounted(() => {
 
 <template>
   <app-layout>
+    <template #header>
+      <div class="text-xl font-semibold leading-tight text-gray-800">
+        Discussion
+      </div>
+    </template>
+
     <div class="py-6">
       <div
         class="
