@@ -3,15 +3,34 @@ import { Link } from "@inertiajs/inertia-vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 import PostList from "@/components/PostList.vue";
+import Paginate from "@/components/Paginate.vue";
 
 defineProps({
-  latestPosts: Array,
+  latestPosts: Object,
 });
 </script>
 
 <template>
   <app-layout>
-    <section>
+    <section class="pb-6">
+      <div
+        class="mx-auto w-full max-w-screen-md px-8 pt-6 flex justify-end"
+        v-if="$page.props.user"
+      >
+        <Link
+          :href="route('discussion.create')"
+          class="
+            block
+            px-4
+            py-3
+            bg-emerald-700
+            rounded-lg
+            text-white
+            font-medium
+          "
+          >+ New discussion</Link
+        >
+      </div>
       <div
         class="
           relative
@@ -63,7 +82,16 @@ defineProps({
         </div>
       </div>
 
-      <post-list :posts="latestPosts" />
+      <post-list :posts="latestPosts.data" />
+
+      <paginate
+        :totalCount="latestPosts.total"
+        thingName="Discussions"
+        :currentPage="latestPosts.current_page"
+        :countPerPage="latestPosts.per_page"
+        :prevPageUrl="route('home', { page: latestPosts.current_page - 1 })"
+        :nextPageUrl="route('home', { page: latestPosts.current_page + 1 })"
+      />
     </section>
   </app-layout>
 </template>

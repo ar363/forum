@@ -139,6 +139,7 @@ onMounted(() => {
         </div>
         <form @submit.prevent="submit">
           <textarea
+            aria-label="Add a reply"
             required
             name=""
             id=""

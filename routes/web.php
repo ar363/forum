@@ -21,8 +21,7 @@ use App\Http\Controllers\CommentController;
 Route::get('/', function () {
     $latestPosts = Post::with('author')
     ->latest()
-    ->limit(15)
-    ->get();
+    ->paginate(15);
 
     return Inertia::render('Home', [
         'latestPosts' => $latestPosts,
