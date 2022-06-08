@@ -85,6 +85,11 @@ defineProps({
       <post-list :posts="latestPosts.data" />
 
       <paginate
+        v-if="
+          latestPosts.current_page * latestPosts.per_page -
+            latestPosts.per_page <=
+          latestPosts.total
+        "
         :totalCount="latestPosts.total"
         thingName="Discussions"
         :currentPage="latestPosts.current_page"
@@ -92,6 +97,15 @@ defineProps({
         :prevPageUrl="route('home', { page: latestPosts.current_page - 1 })"
         :nextPageUrl="route('home', { page: latestPosts.current_page + 1 })"
       />
+      <div
+        class="text-gray-600 text-center px-4"
+        v-else-if="latestPosts.total === 0"
+      >
+        No discussions here yet...
+      </div>
+      <div class="text-gray-600 text-center px-4" v-else>
+        Invalid page number
+      </div>
     </section>
   </app-layout>
 </template>
