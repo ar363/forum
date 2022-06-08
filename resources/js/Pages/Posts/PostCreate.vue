@@ -112,7 +112,12 @@ defineProps({
         </div>
 
         <div class="flex justify-end mt-4">
-          <JetButton type="submit">Create</JetButton>
+          <JetButton
+            type="submit"
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing"
+            >Create</JetButton
+          >
         </div>
       </form>
     </div>

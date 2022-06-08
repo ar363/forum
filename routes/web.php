@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::resource('discussion', PostController::class, ['except' => ['index', 'show']]);
+    Route::resource('reply', CommentController::class, ['only' => ['store']]);
 });
 
 

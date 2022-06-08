@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -36,7 +37,11 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        $reply = Comment::create([...$validatedData, 'created_by' => Auth::user()->id]);
+
+        return redirect(route('discussion.show', ['discussion' => $reply->post]));
     }
 
     /**

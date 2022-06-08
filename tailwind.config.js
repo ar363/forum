@@ -12,7 +12,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Rubik', ...defaultTheme.fontFamily.sans],
+                sans: ['Noto Sans', ...defaultTheme.fontFamily.sans],
             },
         },
     },

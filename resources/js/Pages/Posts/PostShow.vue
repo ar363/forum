@@ -10,10 +10,30 @@ import AvatarGroup from "@/components/AvatarGroup.vue";
 
 import { marked } from "marked";
 import { formatRelative } from "date-fns";
+import { onMounted } from "@vue/runtime-core";
 
-defineProps({
+import Paginate from "@/components/Paginate.vue";
+
+const form = useForm({
+  body: null,
+  post_id: null,
+});
+
+const submit = () => {
+  form.submit("post", route("reply.store"), {
+    onSuccess: () => {
+      form.reset();
+    },
+  });
+};
+
+const props = defineProps({
   post: Object,
-  comments: Array,
+  comments: Object,
+});
+
+onMounted(() => {
+  form.post_id = props.post.id;
 });
 </script>
 
@@ -21,6 +41,22 @@ defineProps({
 <template>
   <app-layout>
     <div class="py-6">
+      <div
+        class="
+          mx-auto
+          my-6
+          max-w-screen-sm
+          bg-green-900
+          text-white
+          font-bold
+          shadow-xl
+          sm:rounded-lg
+          p-8
+        "
+        v-if="form.wasSuccessful"
+      >
+        Successfully added comment!
+      </div>
       <div class="mx-auto max-w-screen-sm bg-white shadow-xl sm:rounded-lg">
         <div class="p-8 pb-4">
           <p class="mb-2 text-xs font-medium text-gray-500">
@@ -97,6 +133,54 @@ defineProps({
           sm:rounded-lg
           p-8
         "
+      >
+        <div class="text-xl font-bold mb-4 text-gray-800">
+          Your thoughts about this?
+        </div>
+        <form @submit.prevent="submit">
+          <textarea
+            required
+            name=""
+            id=""
+            class="
+              block
+              px-3
+              py-2
+              w-full
+              h-48
+              text-gray-900
+              rounded-md
+              border border-gray-200
+              shadow-sm
+              focus:ring
+              focus:outline-none
+              focus:border-emerald-600
+              focus:ring-emerald-600
+              focus:ring-opacity-30
+            "
+            v-model="form.body"
+          ></textarea>
+          <div class="flex justify-end mt-4">
+            <jet-button
+              type="submit"
+              :class="{ 'opacity-25': form.processing }"
+              :disabled="form.processing"
+              >Add to the discussion</jet-button
+            >
+          </div>
+        </form>
+      </div>
+
+      <div
+        class="
+          mx-auto
+          mt-6
+          max-w-screen-sm
+          bg-white
+          shadow-xl
+          sm:rounded-lg
+          p-8
+        "
         v-for="comment in comments.data"
         v-bind:key="comment.id"
       >
@@ -108,35 +192,25 @@ defineProps({
         <div class="prose mt-4" v-html="marked(comment.body)"></div>
       </div>
 
-      <div
-        class="
-          mx-auto
-          mt-6
-          max-w-screen-sm
-          bg-white
-          shadow-xl
-          sm:rounded-lg
-          p-8
-        "
-      >
-        <div class="text-xl font-bold mb-4 text-gray-800">
-          Have something to say?
-        </div>
-        <jet-button>Add to the discussion</jet-button>
-      </div>
-
-      <div
-        class="
-          mx-auto
-          mt-6
-          max-w-screen-sm
-          bg-white
-          shadow-xl
-          sm:rounded-lg
-          p-8
-        "
-      >
-        TODO: pagination
+      <div class="mx-auto mt-6 max-w-screen-sm sm:rounded-lg p-8">
+        <paginate
+          :totalCount="comments.total"
+          thingName="Comments"
+          :currentPage="comments.current_page"
+          :countPerPage="comments.per_page"
+          :prevPageUrl="
+            route('discussion.show', {
+              discussion: post.id,
+              page: comments.current_page - 1,
+            })
+          "
+          :nextPageUrl="
+            route('discussion.show', {
+              discussion: post.id,
+              page: comments.current_page + 1,
+            })
+          "
+        />
       </div>
     </div>
   </app-layout>
