@@ -126,6 +126,26 @@ onMounted(() => {
               formatRelative(new Date(post.last_activity), new Date())
             }}</span>
           </div>
+
+          <div class="">
+            <div
+              class="
+                text-gray-500
+                tracking-wider
+                uppercase
+                text-xs
+                font-medium
+                sm:mb-2
+              "
+            >
+              Category
+            </div>
+            <a
+              class="text-sm text-gray-700"
+              :href="route('category', post.category.slug)"
+              >{{ post.category.name }}</a
+            >
+          </div>
         </div>
       </div>
 

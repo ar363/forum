@@ -94,6 +94,56 @@ defineProps({
             }}</span>
           </div>
         </div>
+        <div class="mt-4 border-t pt-2 flex">
+          <div class="w-full">
+            <span
+              class="
+                text-gray-500
+                tracking-wider
+                uppercase
+                text-xs
+                font-medium
+                sm:mb-2
+              "
+            >
+              Category:
+            </span>
+            <a
+              class="text-sm font-medium text-gray-700"
+              :href="route('category', post.category.slug)"
+            >
+              {{ post.category.name }}
+            </a>
+          </div>
+          <div class="w-full">
+            <span
+              class="
+                text-gray-500
+                tracking-wider
+                uppercase
+                text-xs
+                font-medium
+                sm:mb-2
+              "
+            >
+              Tags:
+            </span>
+            <span class="text-sm">
+              <a
+                :href="route('tag', tag.slug.en)"
+                v-for="(tag, idx) in post.tags"
+                v-bind:key="tag.slug.en"
+              >
+                <span class="" v-if="post.tags.length - 1 !== idx">
+                  {{ tag.name.en }},
+                </span>
+                <span class="" v-else>
+                  {{ tag.name.en }}
+                </span>
+              </a>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

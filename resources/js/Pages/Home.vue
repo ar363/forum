@@ -12,6 +12,12 @@ defineProps({
 
 <template>
   <app-layout>
+    <template #header v-if="latestPosts.current_page > 1">
+      <div class="text-xl font-semibold leading-tight text-gray-800">
+        Page {{ latestPosts.current_page }}
+      </div>
+    </template>
+
     <section class="pb-6">
       <div
         class="mx-auto w-full max-w-screen-md px-8 pt-6 flex justify-end"
@@ -44,7 +50,7 @@ defineProps({
           md:px-12
           lg:px-16 lg:py-12
         "
-        v-if="!$page.props.user"
+        v-if="!$page.props.user && latestPosts.current_page === 1"
       >
         <div class="flex mx-auto w-full text-left">
           <div class="inline-flex relative items-center mx-auto align-middle">
@@ -84,8 +90,14 @@ defineProps({
 
       <post-list :posts="latestPosts.data" />
 
+      <div
+        class="text-gray-600 text-center px-4"
+        v-if="latestPosts.total === 0"
+      >
+        No discussions here yet...
+      </div>
       <paginate
-        v-if="
+        v-else-if="
           latestPosts.current_page * latestPosts.per_page -
             latestPosts.per_page <=
           latestPosts.total
@@ -97,12 +109,6 @@ defineProps({
         :prevPageUrl="route('home', { page: latestPosts.current_page - 1 })"
         :nextPageUrl="route('home', { page: latestPosts.current_page + 1 })"
       />
-      <div
-        class="text-gray-600 text-center px-4"
-        v-else-if="latestPosts.total === 0"
-      >
-        No discussions here yet...
-      </div>
       <div class="text-gray-600 text-center px-4" v-else>
         Invalid page number
       </div>

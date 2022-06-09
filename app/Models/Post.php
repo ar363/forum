@@ -19,7 +19,7 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'tags',
         'created_by', 'category_id'];
 
-    protected $with = ['author'];
+    protected $with = ['author', 'category', 'tags'];
     protected $withCount = ['comments'];
 
     protected $appends = ['last_activity', 'participants'];

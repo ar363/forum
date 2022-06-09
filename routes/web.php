@@ -3,7 +3,9 @@
 use App\Models\Post;
 use App\Models\User;
 use Inertia\Inertia;
+use Spatie\Tags\Tag;
 use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\PostController;
@@ -44,6 +46,28 @@ Route::get('/profile/{user}', function (User $user) {
         ]
     ]);
 })->whereNumber('id')->name('profile');
+
+
+Route::get('/tag/{slug}', function ($slug) {
+    return Inertia::render('TagPage', [
+        'tag' => $slug,
+        'posts' => Post::withAnyTags([$slug])
+            ->latest()
+            ->paginate(15),
+    ]);
+})->name('tag');
+
+
+Route::get('/category/{slug}', function ($slug) {
+    $category = Category::where(['slug' => $slug])->firstOrFail();
+
+    return Inertia::render('CategoryPage', [
+        'category' => $category,
+        'posts' => Post::whereBelongsTo($category)
+            ->latest()
+            ->paginate(15),
+    ]);
+})->name('category');
 
 
 Route::middleware([
