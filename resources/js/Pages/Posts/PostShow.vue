@@ -181,7 +181,7 @@ onMounted(() => {
                 {{ post.author.name + " [#" + post.author.id + "]" }} </a
               >, {{ formatRelative(new Date(post.created_at), new Date()) }}
             </span>
-            <span v-if="$page.props.user.id === post.author.id">
+            <span v-if="$page.props.user?.id === post.author.id">
               <button @click="postBeingDeleted = true">Delete</button>
             </span>
           </p>
@@ -348,7 +348,7 @@ onMounted(() => {
               {{ comment.author.name + " [#" + comment.author.id + "]" }} </a
             >, {{ formatRelative(new Date(comment.created_at), new Date()) }}
           </span>
-          <span v-if="$page.props.user.id === comment.author.id">
+          <span v-if="$page.props.user?.id === comment.author.id">
             <button @click="commentBeingDeleted = comment.id">Delete</button>
           </span>
         </p>
