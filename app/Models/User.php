@@ -72,6 +72,6 @@ class User extends Authenticatable
     protected function defaultProfilePhotoUrl()
     {
         // consider hosting your own instance: https://github.com/ar363/pfpgen
-        return 'https://pfpgen.vercel.app/?username='.urlencode($this->name).'&name='.urlencode($this->name);
+        return 'https://pfpgen.vercel.app/?username='.$this->id.'&name='.urlencode($this->name);
     }
 }
