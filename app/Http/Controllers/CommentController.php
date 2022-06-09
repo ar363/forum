@@ -84,8 +84,16 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $reply)
     {
-        //
+        if (Auth::user()->id != $reply->created_by) {
+            abort(403);
+        }
+
+        $parent_post = $reply->post_id;
+
+        Comment::destroy($reply->id);
+
+        return redirect(route('discussion.show', $parent_post));
     }
 }

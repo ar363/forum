@@ -93,8 +93,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $discussion)
     {
-        //
+        if (Auth::user()->id != $discussion->created_by) {
+            abort(403);
+        }
+
+        Post::destroy($discussion->id);
+
+        return redirect(route('home'));
     }
 }

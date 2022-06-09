@@ -25,7 +25,10 @@ defineProps({
     <section class="pb-6">
       <post-list :posts="posts.data" />
 
-      <div class="text-gray-600 text-center px-4" v-if="posts.total === 0">
+      <div
+        class="text-gray-600 text-center px-4"
+        v-if="posts.total === 0 && posts.current_page === 1"
+      >
         No discussions here yet...
       </div>
       <paginate

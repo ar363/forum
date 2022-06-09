@@ -76,7 +76,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::resource('discussion', PostController::class, ['except' => ['index', 'show']]);
-    Route::resource('reply', CommentController::class, ['only' => ['store']]);
+    Route::resource('reply', CommentController::class, ['only' => ['store', 'destroy']]);
 });
 
 

@@ -92,7 +92,7 @@ defineProps({
 
       <div
         class="text-gray-600 text-center px-4"
-        v-if="latestPosts.total === 0"
+        v-if="latestPosts.total === 0 && latestPosts.current_page === 1"
       >
         No discussions here yet...
       </div>
