@@ -1,4 +1,6 @@
 <script setup>
+import { Link } from "@inertiajs/inertia-vue3";
+
 defineProps({
   currentPage: Number,
   countPerPage: Number,
@@ -28,7 +30,7 @@ defineProps({
       {{ thingName }}
     </span>
     <div class="inline-flex mt-2 xs:mt-0">
-      <a
+      <Link
         :href="prevPageUrl"
         class="
           inline-flex
@@ -59,8 +61,8 @@ defineProps({
           ></path>
         </svg>
         Prev
-      </a>
-      <a
+      </Link>
+      <Link
         :href="nextPageUrl"
         class="
           inline-flex
@@ -92,7 +94,7 @@ defineProps({
             clip-rule="evenodd"
           ></path>
         </svg>
-      </a>
+      </Link>
     </div>
   </div>
 </template>

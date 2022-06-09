@@ -108,12 +108,12 @@ defineProps({
             >
               Category:
             </span>
-            <a
+            <Link
               class="text-sm font-medium text-gray-700"
               :href="route('category', post.category.slug)"
             >
               {{ post.category.name }}
-            </a>
+            </Link>
           </div>
           <div class="w-full">
             <span
@@ -129,7 +129,7 @@ defineProps({
               Tags:
             </span>
             <span class="text-sm">
-              <a
+              <Link
                 :href="route('tag', tag.slug.en)"
                 v-for="(tag, idx) in post.tags"
                 v-bind:key="tag.slug.en"
@@ -140,7 +140,7 @@ defineProps({
                 <span class="" v-else>
                   {{ tag.name.en }}
                 </span>
-              </a>
+              </Link>
             </span>
           </div>
         </div>
